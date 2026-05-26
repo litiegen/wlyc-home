@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>蔚蓝研创 · 智能网联汽车技术专家</title>
+    <!-- 引入 Google Fonts 提升字体质感 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (免费图标库) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1e293b;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* 容器通用样式 */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.05);
+            z-index: 100;
+            padding: 16px 0;
+            transition: all 0.2s;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0f2b5e, #1e6f9f);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .logo p {
+            font-size: 0.75rem;
+            color: #5b6e8c;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 36px;
+            list-style: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1f2a44;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+
+        .nav-links a:hover {
+            color: #2c8bc8;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #1f2a44;
+        }
+
+        /* 按钮通用样式 */
+        .btn {
+            display: inline-block;
+            background: #1a5d9c;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.25s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #1a5d9c;
+            color: #1a5d9c;
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: #1a5d9c;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:hover {
+            background: #0e4070;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26,93,156,0.2);
+        }
+
+        /* Hero 区域 */
+        .hero {
+            padding: 80px 0 80px;
+            background: linear-gradient(145deg, #f9fcff 0%, #eef4fa 100%);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1.2;
+        }
+
+        .hero-badge {
+            background: rgba(26,93,156,0.12);
+            color: #1a5d9c;
+            padding: 6px 16px;
+            border-radius: 40px;
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: #0c1b33;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #3a4a6e;
+            max-width: 540px;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            flex: 0.9;
+            background: rgba(26,93,156,0.03);
+            border-radius: 40px;
+            text-align: center;
+        }
+
+        .hero-icon {
+            font-size: 10rem;
+            color: #2c8bc8;
+            opacity: 0.8;
+        }
+
+        /* 通用 section */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #0c1b33;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #5b6e8c;
+            max-width: 680px;
+            margin: 0 auto 60px auto;
+            font-size: 1.1rem;
+        }
+
+        /* 卡片网格 */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 28px;
+            padding: 32px 28px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #edf2f7;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+            border-color: #cbdde9;
+        }
+
+        .card-icon {
+            font-size: 2.8rem;
+            color: #1a5d9c;
+            margin-bottom: 24px;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #4a5b7a;
+            line-height: 1.5;
+        }
+
+        /* 关于区域 */
+        .about-wrap {
+            background: #f8fafd;
+            border-radius: 48px;
+            padding: 48px 40px;
+            display: flex;
+            gap: 48px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1.2;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-text p {
+            margin-bottom: 24px;
+            color: #2c3e5c;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-top: 24px;
+        }
+
+        .contact-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .contact-list i {
+            width: 28px;
+            color: #1a5d9c;
+            font-size: 1.2rem;
+        }
+
+        .about-stats {
+            flex: 0.8;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .stat-item {
+            background: white;
+            border-radius: 24px;
+            padding: 28px 20px;
+            text-align: center;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #1a5d9c;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #0b1423;
+            color: #cbd5e6;
+            padding: 48px 0 24px;
+            margin-top: 20px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+
+        .footer-brand p {
+            margin-top: 10px;
+            max-width: 260px;
+            font-size: 0.9rem;
+        }
+
+        .footer-links h4, .footer-contact h4 {
+            color: white;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+        .footer-links li, .footer-contact li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #b9c3da;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 28px;
+            border-top: 1px solid #1e2a44;
+            font-size: 0.85rem;
+        }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .container {
+                padding: 0 20px;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            .hero-grid {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .about-wrap {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-list li {
+                justify-content: center;
+            }
+            .section-title {
+                font-size: 1.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100% - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 24px;
+                gap: 28px;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+                transition: 0.3s;
+                border-radius: 0 20px 20px 0;
+                z-index: 99;
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+            .navbar {
+                padding: 12px 0;
+            }
+            .hero-icon {
+                font-size: 7rem;
+            }
+            .cards-grid {
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .btn {
+                padding: 10px 20px;
+            }
+            .service-card {
+                padding: 28px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-container">
+        <div class="logo">
+            <h1>蔚蓝研创</h1>
+            <p>WELAND TECH</p>
+        </div>
+        <button class="menu-toggle" id="mobileMenuBtn" aria-label="菜单">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#solutions">解决方案</a></li>
+            <li><a href="#about">关于我们</a></li>
+            <li><a href="#contact">联系方式</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main>
+    <!-- Hero 区域 -->
+    <section id="home" class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-car-side"></i> 智能网联 · 领跑未来</span>
+                <h1>驱动新能源汽车<br>人才与技术创新</h1>
+                <p>蔚蓝研创为职业院校、科研机构及K12提供全方位前沿实训设备与科研平台，打造产学研用一体化解决方案。</p>
+                <div class="hero-buttons">
+                    <a href="#solutions" class="btn btn-primary">探索产品 <i class="fas fa-arrow-right"></i></a>
+                    <a href="#about" class="btn btn-outline">了解更多</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <i class="fas fa-microchip hero-icon"></i>
+                <!-- 优雅科技感图标代替实拍图 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心产品与服务 -->
+    <section id="solutions">
+        <div class="container">
+            <h2 class="section-title">前沿技术 · 实训生态</h2>
+            <p class="section-sub">覆盖智能网联、新能源、无人驾驶及青少年科普，提供全流程教学与科研设备</p>
+            <div class="cards-grid">
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-charging-station"></i></div>
+                    <h3>新能源汽车实训</h3>
+                    <p>高压安全、三电系统、故障模拟台架，匹配最新国标及竞赛标准，培养高技能人才。</p>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-wifi"></i></div>
+                    <h3>智能网联汽车平台</h3>
+                    <p>V2X车路协同、环境感知、ADAS测试装调，一体化教学科研解决方案。</p>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-robot"></i></div>
+                    <h3>科研无人车平台</h3>
+                    <p>模块化线控底盘，开放ROS接口，支持二次开发与自动驾驶算法验证。</p>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>K12 未来汽车工程师</h3>
+                    <p>科普教育套件、图形化编程小车，点燃青少年科技梦想，助力中小学科创课程。</p>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-microphone-alt"></i></div>
+                    <h3>多功能线控底盘</h3>
+                    <p>高精度线控转向/制动/驱动，稳定可靠，满足多种场景下的智能驾驶开发需求。</p>
+                </div>
+                <div class="service-card">
+                    <div class="card-icon"><i class="fas fa-chalkboard-user"></i></div>
+                    <h3>师资培训 & 竞赛支持</h3>
+                    <p>提供完整师资研修、技能竞赛指导，校企共建产业学院，赋能职业教育高质量发展。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我们 + 联系方式 / 荣誉简讯 -->
+    <section id="about">
+        <div class="container">
+            <div class="about-wrap">
+                <div class="about-text">
+                    <h2>专注汽车前沿科技 <br>赋能未来教育生态</h2>
+                    <p>蔚蓝研创（北京）科技有限公司，坐落于北京科创腹地，是国家级高新技术企业。公司与国内多所知名职业院校、本科院校及科研院所深度合作，拥有数十项专利及软著，持续为智能网联汽车行业输送高素质技术人才。</p>
+                    <p>我们坚信“源于产业，回馈教育”，从一线研发到教学转化，让每一套设备都能精准服务于人才培养与科技创新。</p>
+                    <div id="contact">
+                        <ul class="contact-list">
+                            <li><i class="fas fa-map-marker-alt"></i> 北京市朝阳区望京科技园 · 研发中心</li>
+                            <li><i class="fas fa-phone-alt"></i> 400 6688 215 (咨询专线)</li>
+                            <li><i class="fas fa-envelope"></i> contact@wlycpark.com</li>
+                            <li><i class="fas fa-globe"></i> www.wlycpark.com</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div>省级合作院校</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">8项</div>
+                        <div>核心发明专利</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1000+</div>
+                        <div>实训设备覆盖学员</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3 style="color:white;">蔚蓝研创</h3>
+                <p>驱动智能驾驶人才战略，助力中国汽车产业升级。</p>
+            </div>
+            <div class="footer-links">
+                <h4>快速链接</h4>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#solutions">解决方案</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>官方信息</h4>
+                <ul>
+                    <li><i class="fas fa-phone-alt"></i> 010-5678 1234</li>
+                    <li><i class="far fa-clock"></i> 周一至周五 9:00-18:00</li>
+                    <li><i class="fas fa-shield-alt"></i> 京ICP备2026003893号-1</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 蔚蓝研创（北京）科技有限公司 | 智能汽车教育引领者
+        </div>
+    </div>
+</footer>
+
+<!-- 移动端菜单交互 -->
+<script>
+    const menuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    if (menuBtn && navLinks) {
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            // 改变图标样式
+            const icon = menuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        // 点击导航项后自动关闭菜单（手机端体验）
+        const navItems = navLinks.querySelectorAll('a');
+        navItems.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = menuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+    }
+    // 平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId === "#" || targetId === "") return;
+            const targetElem = document.querySelector(targetId);
+            if (targetElem) {
+                e.preventDefault();
+                targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+</script>
+</body>
+</html>
